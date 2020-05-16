@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-""" redditRegexCounter.py - count the number of regex matches in a subreddit
+""" count the number of regex matches in a subreddit
 
 Copyright (C) 2020  Fufu Fang
 This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 __author__ = "Fufu Fang"
 __copyright__ = "The GNU General Public License v3.0"
 
-from redditDownloader import SubmissionGenerator, CommentGenerator
+from .redditDownloader import SubmissionGenerator, CommentGenerator
 import pickle
 import re
 
@@ -107,7 +107,8 @@ class SubmissionCounter(RegexCounter):
             - -1, convert to lower caser
             - 0, does not perform case conversion
             - 1, convert to upper case
-        :param result: the optional resultionary which contains previous results
+        :param result: the optional result dictionary which contains previous
+        results
         :param download_deleted: whether to download deleted posts
         """
         if result is None:
@@ -130,7 +131,8 @@ class CommentCounter(RegexCounter):
             - -1, convert to lower caser
             - 0, does not perform case conversion
             - 1, convert to upper case
-        :param result: the optional resultionary which contains previous results
+        :param result: the optional result dictionary which contains previous
+        results
         """
         if result is None:
             result = {}

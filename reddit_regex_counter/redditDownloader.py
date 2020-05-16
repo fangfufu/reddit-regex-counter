@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-""" redditDownloader.py - Download posts and comments  from a subreddit
+""" Download posts and comments  from a subreddit
 
 Copyright (C) 2020  Fufu Fang
 This program is free software: you can redistribute it and/or modify
