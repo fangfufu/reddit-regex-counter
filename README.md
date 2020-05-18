@@ -1,6 +1,5 @@
 # reddit-regex-counter
-Count the number of regular expression appearances within a subreddit within 
-a certain period of time
+Count the number of regular expression matches within a subreddit.
 
 ## Description
 This package is a wrapper for [psaw](https://github.com/dmarx/psaw). It allows
@@ -24,8 +23,7 @@ please first clone this repository, then run:
 
     Usage: reddit-regex-counter [OPTIONS]
 
-    Count the number of regex appearances within a subreddit between a certain
-    period of time
+    Count the number of regex matches within a subreddit.
 
     Options:
     -s, --start TEXT    The starting date of the search period, in the format of
