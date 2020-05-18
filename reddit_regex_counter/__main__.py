@@ -24,8 +24,7 @@ import click
               help="The regular expression pattern for matching")
 def main(start, end, name, pattern):
     """
-    Count the number of regular expression appearances within a subreddit
-    within a certain period of time.
+    Count the number of regular expression meatches within a subreddit.
     """
     s_time = datetime.strptime(start, "%Y-%m-%d")
     e_time = datetime.strptime(end, "%Y-%m-%d")
