@@ -20,12 +20,39 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 __author__ = "Fufu Fang"
 __copyright__ = "The GNU General Public License v3.0"
 
-from .redditDownloader import SubmissionGenerator, CommentGenerator
+if __package__ is None or __package__ == '':
+    # noinspection PyUnresolvedReferences
+    from redditDownloader import SubmissionGenerator, CommentGenerator
+else:
+    from .redditDownloader import SubmissionGenerator, CommentGenerator
+
+from datetime import timedelta, datetime
 import pickle
 import re
 
 
-class RegexCounter:
+class Counter:
+    def __init__(self, result=None):
+        if result is None:
+            result = {}
+        self.result = result
+
+    def __repr__(self):
+        s = "word:\tcount:\n"
+        for i in self.result.items():
+            s += str(i[0]) + "\t" + str(i[1]) + "\n"
+        return s
+
+    def save_result(self, fn):
+        with open(fn, "wb") as f:
+            pickle.dump(self.result, f)
+
+    def load_result(self, fn):
+        with open(fn, "rb") as f:
+            self.result = pickle.load(f)
+
+
+class RegexCounter(Counter):
     """Class for counting the number of regex appearance from a generator
     """
 
@@ -40,13 +67,11 @@ class RegexCounter:
             - 1, convert to upper case
         :param result: the optional resultionary which contains previous results
         """
-        if result is None:
-            result = {}
         self._gen = gen
         self.attr = attr
         self.pattern = pattern
         self.case = case
-        self.result = result
+        super().__init__(result)
 
     def __iter__(self):
         return self
@@ -69,32 +94,18 @@ class RegexCounter:
                     self.result[word] += 1
                 else:
                     self.result[word] = 1
-        self.result = dict(sorted(self.result.items(), key=lambda x:x[1],
-                             reverse=True))
+        self.result = dict(sorted(self.result.items(), key=lambda x: x[1],
+                                  reverse=True))
         return self
-
-    def save_result(self, fn):
-        with open(fn, "wb") as f:
-            pickle.dump(self.result, f)
-
-    def load_result(self, fn):
-        with open(fn, "rb") as f:
-            self.result = pickle.load(f)
 
     def get_result(self):
         for i in self:
             pass
         return self.result
 
-    def __repr__(self):
-        s = "word:\tcount:\n"
-        for i in self.result.items():
-            s += str(i[0]) + "\t" + str(i[1]) + "\n"
-        return s
-
 
 class SubmissionCounter(RegexCounter):
-    """ Class for counting regex in a Reddit submission """
+    """ Class for counting regex in Reddit submissions """
 
     def __init__(self, s_name, s_time, e_time, pattern, case=0, result=None,
                  download_deleted=False):
@@ -111,15 +122,13 @@ class SubmissionCounter(RegexCounter):
         results
         :param download_deleted: whether to download deleted posts
         """
-        if result is None:
-            result = {}
         super().__init__(SubmissionGenerator(s_name, s_time, e_time,
                                              download_deleted),
                          ["title", "selftext"], pattern, case, result)
 
 
 class CommentCounter(RegexCounter):
-    """ Class for counting regex in a Reddit comment"""
+    """ Class for counting regex in Reddit comments"""
 
     def __init__(self, s_name, s_time, e_time, pattern, case=0, result=None):
         """
@@ -134,7 +143,36 @@ class CommentCounter(RegexCounter):
         :param result: the optional result dictionary which contains previous
         results
         """
-        if result is None:
-            result = {}
         super().__init__(CommentGenerator(s_name, s_time, e_time),
                          ["body"], pattern, case, result)
+
+
+class RedditRegexCounter(Counter):
+    """ Class for counting regex in both submissions and comments """
+
+    def __init__(self, s_name, s_time, e_time, pattern, case=0,
+                 result=None, download_deleted=False):
+        """
+
+        :param s_name: subreddit name
+        :param s_time: start time as a datetime object
+        :param e_time: end time as a datetime object
+        :param pattern: the regex pattern to search
+        :param case: whether we want to perform case conversion:
+            - -1, convert to lower caser
+            - 0, does not perform case conversion
+            - 1, convert to upper case
+        :param result: the optional result dictionary which contains previous
+        results
+        :param download_deleted: whether to download deleted posts
+        """
+        # Count the number of occurrence in reddit posts
+        s_counter = SubmissionCounter(s_name, s_time, e_time, pattern,
+                                      result=result,
+                                      download_deleted=download_deleted)
+        s_counter.get_result()
+        # Count the number of occurrence in comments
+        c_counter = CommentCounter(s_name, s_time, e_time, pattern,
+                                   result=s_counter.result)
+        c_counter.get_result()
+        super().__init__(c_counter.result)

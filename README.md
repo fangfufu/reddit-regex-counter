@@ -1,12 +1,13 @@
 # reddit-regex-counter
-Count the number of regex appearances in a subreddit between a certain period
- of time
+Count the number of regex appearances within a subreddit between a certain 
+period of time
 
 ## Description
 This package is a wrapper for [psaw](https://github.com/dmarx/psaw). It allows
-the user to easily count the number of a certain regex pattern within a
-subreddit. The regex matches are outputted to a dictionary, with the words
-themselves being the keys, and the number of occurrences as the values.
+the user to easily count the number of a certain regex pattern between a certain
+period of time within a subreddit. The regex matches are stored in a 
+dictionary, with the matches themselves being the keys, and the number of 
+occurrences as the values.
 
  
 ## License
