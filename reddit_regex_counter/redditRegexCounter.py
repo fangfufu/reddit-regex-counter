@@ -38,7 +38,7 @@ class Counter:
         self.result = result
 
     def __repr__(self):
-        s = "word:\tcount:\n"
+        s = "match:\tcount:\n"
         for i in self.result.items():
             s += str(i[0]) + "\t" + str(i[1]) + "\n"
         return s
@@ -94,15 +94,15 @@ class RegexCounter(Counter):
                     self.result[word] += 1
                 else:
                     self.result[word] = 1
-        self.result = dict(sorted(self.result.items(), key=lambda x: x[1],
-                                  reverse=True))
         return self
 
     def get_result(self):
+        """ Iterate through the generator, and obtain the final result """
         for i in self:
             pass
+        self.result = dict(sorted(self.result.items(), key=lambda x: x[1],
+                                  reverse=True))
         return self.result
-
 
 class SubmissionCounter(RegexCounter):
     """ Class for counting regex in Reddit submissions """
