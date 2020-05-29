@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Count the number of regex appearances within a subreddit between a certain
 period of time, see: https://github.com/fangfufu/reddit-regex-counter
@@ -138,7 +140,7 @@ setup(
     #
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['psaw', 'click'],  # Optional
+    install_requires=['psaw'],  # Optional
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). Users will be able to install these using the "extras"

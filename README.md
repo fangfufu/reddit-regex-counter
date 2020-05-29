@@ -22,20 +22,22 @@ please first clone this repository, then run:
 
 ## Usage
 
-    Usage: reddit-regex-counter [OPTIONS]
+    usage: reddit-regex-counter [-h] [-s START] [-e END] -n NAME -p PATTERN
 
-    Count the number of regex appearances within a subreddit between a certain
-    period of time
+    Count the number of regular expression appearances within a subreddit within a
+    certain period of time.
 
-    Options:
-    -s, --start TEXT    The starting date of the search period, in the format of
-                        %Y-%m-%d (e.g. 2020-01-31)
-    -e, --end TEXT      The starting date of the search period, in the format of
-                        %Y-%m-%d (e.g. 2020-02-01)
-    -n, --name TEXT     The name of the subreddit  [required]
-    -p, --pattern TEXT  The regular expression pattern for matching  [required]
-    --help              Show this message and exit.
-    
+    optional arguments:
+    -h, --help            show this help message and exit
+    -s START, --start START
+                            The starting date of the search period, in the format
+                            of %Y-%m-%d (e.g. 2020-01-31)
+    -e END, --end END     The starting date of the search period, in the format
+                            of %Y-%m-%d (e.g. 2020-02-01)
+    -n NAME, --name NAME  The name of the subreddit
+    -p PATTERN, --pattern PATTERN
+                            The regular expression pattern for matching
+
 ## Example Output
 
     $ reddit-regex-counter \
