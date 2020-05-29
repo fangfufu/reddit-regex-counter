@@ -1,6 +1,5 @@
 # reddit-regex-counter
-Count the number of regular expression appearances within a subreddit within 
-a certain period of time
+Count the number of regular expression matches within a subreddit.
 
 ## Description
 This package is a wrapper for [psaw](https://github.com/dmarx/psaw). It allows
@@ -24,8 +23,7 @@ please first clone this repository, then run:
 
     usage: reddit-regex-counter [-h] [-s START] [-e END] -n NAME -p PATTERN
 
-    Count the number of regular expression appearances within a subreddit within a
-    certain period of time.
+    Count the number of regex matches within a subreddit
 
     optional arguments:
     -h, --help            show this help message and exit
@@ -66,20 +64,19 @@ please first clone this repository, then run:
  
 ## License
 
-reddit-regix-counter - count the number of regex appearance within a
-subreddit during a certain period. 
+    reddit-regix-counter - count the number of regex matches within a subreddit
 
-Copyright (C) 2020  Fufu Fang
+    Copyright (C) 2020  Fufu Fang
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.

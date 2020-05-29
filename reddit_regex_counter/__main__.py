@@ -12,9 +12,8 @@ from datetime import datetime
 
 
 def parse_args():
-    parser=ArgumentParser(description="Count the number of regular expression \
-                          appearances within a subreddit within a certain \
-                          period of time.")
+    parser=ArgumentParser(description="Count the number of regex matches within\
+                          a subreddit")
     parser.add_argument("-s", "--start", type=str,
               help="The starting date of the search period, in the format of \
               %%Y-%%m-%%d (e.g. 2020-01-31)")
